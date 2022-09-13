@@ -14,11 +14,11 @@ class App {
         this.listen();
     }
 
-    
+
     routes() {
         this.app = express();
         this.app.route("/").get((req, res) => {
-            res.sendFile(__dirname + '/index.html');
+            res.sendFile(__dirname + '/front/index.html');
         });
     }
 
