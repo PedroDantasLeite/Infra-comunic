@@ -1,4 +1,4 @@
-import app from "./app";
+import app from "./index";
 import { Server } from 'http';
 
 let port = process.env.PORT || app.PORT;

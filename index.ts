@@ -18,7 +18,7 @@ class App {
     routes() {
         this.app = express();
         this.app.route("/").get((req, res) => {
-            res.sendFile(__dirname + '/front/index.html');
+            res.sendFile(__dirname + '/index.html');
         });
     }
 
@@ -32,9 +32,14 @@ class App {
         this.io.on('connection', (socket: any) => {
 
             console.log('a user connected');
+            console.log(socket)
 
-            socket.on('chat message', (m: any) => {
-                this.io.emit('chat message', m);
+            socket.on('incomingMessage', (m: any) => {
+
+                console.log('chegou a msg', m);
+                const m2 = m.msg;
+                console.log(m2);
+                this.io.emit('incomingMessage_rec', m2 + " from server");
             });
 
 

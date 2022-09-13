@@ -65,12 +65,12 @@
             var socket = io();
 
             $('form').submit(function () {
-                socket.emit('chat message', $('#m').val() + 'TESTE');
+                socket.emit('a', $('#m').val() + 'TESTE');
                 $('#m').val('');
                 return false;
             });
 
-            socket.on('chat message', function (msg) {
+            socket.on('incomingMessage_rec', function (msg) {
                 $('#messages').append($('<li>').text(msg));
             });
         });
