@@ -33,10 +33,11 @@ class App {
             socket.on('incomingMessage', (tp) => {
                 if (tp.sentBy == serverClient_1.ServerClient.CLIENT) {
                     if (tp.errorFlag) {
+                        const newErrorTp = tp;
+                        newErrorTp.message = "Error Message";
+                        newErrorTp.sentBy = serverClient_1.ServerClient.SERVER;
+                        this.io.emit('errorMessage', newErrorTp);
                     }
-                    else if (tp.lostFlag) {
-                    }
-                    console.log('t');
                     const newTp = tp;
                     newTp.message = "Tp: " + tp.id + " was sucessfully received";
                     newTp.sentBy = serverClient_1.ServerClient.SERVER;
