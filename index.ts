@@ -55,7 +55,7 @@ class App {
                     newTp.message = "Tp: " +  tp.id + " was sucessfully received";
                     newTp.sentBy = ServerClient.SERVER;
                     
-                    this.io.emit('receivedMessage_rec', newTp);
+                    this.io.emit('receivedMessage', newTp);
                     return
                 }
                 
