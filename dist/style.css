@@ -1,0 +1,33 @@
+body {
+    background-color: #AAA;
+    font-family: 'Arial', sans-serif;
+    padding: 25px;
+  }
+  p,h1 {
+    color: #FFF;
+  }
+  .message {
+    font-size: 24px;
+    width: 90%;
+  }
+  textarea {
+    height: 300px;
+    padding: 10px;
+    width: 97.5%;
+  }
+  .send {
+    padding: 15px;
+  }
+  .top {
+    display: flex;
+    justify-content: center;
+    background-color: #CCC;
+    border-radius: 5px;
+    border: #000 2px solid;
+  }
+  .mpanel {
+    width: 50%;
+  }
+  .send {
+    width: 90%;
+  }
