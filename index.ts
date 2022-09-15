@@ -45,11 +45,11 @@ class App {
 
                 if (tp.sentBy == ServerClient.CLIENT) {
                     if (tp.errorFlag) {
-                        
+                    
                     } else if (tp.lostFlag) {
                         
                     }
-
+                    console.log('t');
                     const newTp: TransportProtocol = tp;
                     newTp.message = "Tp: " +  tp.id + " was sucessfully received";
                     newTp.sentBy = ServerClient.SERVER;

@@ -1,5 +1,8 @@
 var id = 0;
+const TIMEOUT = 5;
 const socket = io();
+const emmitedRequests = [];
+const responsesRequests = [];
 function addLogMessage(message) {
     document.getElementById('console').innerHTML += message + "\n";
 }
@@ -15,15 +18,28 @@ function createProtocol(data) {
     id++;
     return protocol;
 }
-function sendRequest() {
+function getData() {
     message = document.getElementById('message').value;
     error = document.getElementById('error').checked;
     lost = document.getElementById('lost').checked;
-    const protocol = createProtocol({message, errorFlag: error, lostFlag: lost})
-    socket.emit('incomingMessage', protocol)   
+    return {message, errorFlag: error, lostFlag: lost};
+}
+function sendRequest(data) {
+    message = document.getElementById('message').value;
+    error = document.getElementById('error').checked;
+    lost = document.getElementById('lost').checked;
+    const protocol = createProtocol(data)
+    emmitedRequests.push(protocol.id);
+    socket.emit('incomingMessage', protocol);
+
+    setTimeout(() => {
+        if(!responsesRequests.includes(protocol.id)) {
+            addLogMessage(`The protocol ${protocol.id} had lost!`);
+        }
+    }, TIMEOUT * 1000);
 }
 socket.on('receivedMessage', (protocol) => {
+    responsesRequests.push(protocol.id);
     addLogMessage(protocol.message);
-    console.log("mss");
 });
 

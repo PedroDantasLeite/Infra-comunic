@@ -36,6 +36,7 @@ class App {
                     }
                     else if (tp.lostFlag) {
                     }
+                    console.log('t');
                     const newTp = tp;
                     newTp.message = "Tp: " + tp.id + " was sucessfully received";
                     newTp.sentBy = serverClient_1.ServerClient.SERVER;
