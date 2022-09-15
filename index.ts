@@ -53,7 +53,6 @@ class App {
                     const newTp: TransportProtocol = tp;
                     newTp.message = "Tp: " +  tp.id + " was sucessfully received";
                     newTp.sentBy = ServerClient.SERVER;
-                    console.log(newTp);
                     this.io.emit('receivedMessage', newTp);
                     return
                 }
