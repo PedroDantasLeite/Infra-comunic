@@ -45,9 +45,10 @@ class App {
 
                 if (tp.sentBy == ServerClient.CLIENT) {
                     if (tp.errorFlag) {
-                        
-                    } else if (tp.lostFlag) {
-                        
+                        const newErrorTp: TransportProtocol = tp;
+                        newErrorTp.message = "Error Message"
+                        newErrorTp.sentBy = ServerClient.SERVER;
+                        this.io.emit('errorMessage', newErrorTp)
                     }
 
                     const newTp: TransportProtocol = tp;
