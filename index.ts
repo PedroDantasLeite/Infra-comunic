@@ -1,6 +1,7 @@
 import * as express from "express";
 import { createServer, Server } from 'http';
 import * as socketIo from 'socket.io';
+import {TransportProtocol} from './Transport';
 
 class App {
     public app: express.Application;
@@ -18,7 +19,7 @@ class App {
     routes() {
         this.app = express();
         this.app.route("/").get((req, res) => {
-            res.sendFile(__dirname + '/index.html');
+            res.sendFile(__dirname + '/sample.html');
         });
     }
 
@@ -34,12 +35,9 @@ class App {
             console.log('a user connected');
             console.log(socket)
 
-            socket.on('incomingMessage', (m: any) => {
+            socket.on('incomingMessage', (tp: TransportProtocol) => {
 
-                console.log('chegou a msg', m);
-                const m2 = m.msg;
-                console.log(m2);
-                this.io.emit('incomingMessage_rec', m2 + " from server");
+                this.io.emit('incomingMessage_rec', tp);
             });
 
 
