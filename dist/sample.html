@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>HTML</title>
+    <link rel="stylesheet" href="css">
+    <body>
+      <div class="top">
+        <div class="mpanel">
+          <input type="text" id="message" class="message" placeholder="Mensagem"></input><br></br>
+          <input type="checkbox" id="error">Error</input><br></br>
+          <input type="checkbox" id="lost">Failure</input><br></br>
+          <button onclick="sendRequest()" id="send" class="send">Send</button>  
+        </div>
+        <textarea id="console"></textarea>
+      </div>
+      <script src="/socket.io/socket.io.js"></script>
+      <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
+      <script src="js"></script>
+
+    </body>
+  </head>
+</html>
+
+<!-- file:///home/felipe/school/incomu/Infra-comunic/front/sample.html -->
