@@ -21,6 +21,12 @@ class App {
         this.app.route("/").get((req, res) => {
             res.sendFile(__dirname + '/sample.html');
         });
+        this.app.route('/js').get((req, res) => {
+            res.sendFile(__dirname + '/form-script.js')
+        });
+        this.app.route('/css').get((req, res) => {
+            res.sendFile(__dirname + '/style.css')
+        });
     }
 
     private sockets(): void {
