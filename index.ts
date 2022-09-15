@@ -49,6 +49,7 @@ class App {
                         newErrorTp.message = "Error Message"
                         newErrorTp.sentBy = ServerClient.SERVER;
                         this.io.emit('errorMessage', newErrorTp)
+                        return;
                     }
                     const newTp: TransportProtocol = tp;
                     newTp.message = "Tp: " +  tp.id + " was sucessfully received";

@@ -18,6 +18,10 @@ function createProtocol(data) {
     id++;
     return protocol;
 }
+function sendFromCode() {
+    const data = getData();
+    sendRequest(data);
+}
 function getData() {
     message = document.getElementById('message').value;
     error = document.getElementById('error').checked;
@@ -25,12 +29,10 @@ function getData() {
     return {message, errorFlag: error, lostFlag: lost};
 }
 function sendRequest(data) {
-    message = document.getElementById('message').value;
-    error = document.getElementById('error').checked;
-    lost = document.getElementById('lost').checked;
     const protocol = createProtocol(data)
     emmitedRequests.push(protocol.id);
-    socket.emit('incomingMessage', protocol);
+
+    if(!data.lostFlag) socket.emit('incomingMessage', protocol);
 
     setTimeout(() => {
         if(!responsesRequests.includes(protocol.id)) {
@@ -39,6 +41,10 @@ function sendRequest(data) {
     }, TIMEOUT * 1000);
 }
 socket.on('receivedMessage', (protocol) => {
+    responsesRequests.push(protocol.id);
+    addLogMessage(protocol.message);
+});
+socket.on('errorMessage', (protocol) => {
     responsesRequests.push(protocol.id);
     addLogMessage(protocol.message);
 });

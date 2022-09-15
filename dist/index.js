@@ -37,6 +37,7 @@ class App {
                         newErrorTp.message = "Error Message";
                         newErrorTp.sentBy = serverClient_1.ServerClient.SERVER;
                         this.io.emit('errorMessage', newErrorTp);
+                        return;
                     }
                     const newTp = tp;
                     newTp.message = "Tp: " + tp.id + " was sucessfully received";
