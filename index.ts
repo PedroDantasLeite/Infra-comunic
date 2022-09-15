@@ -1,6 +1,7 @@
 import * as express from "express";
 import { createServer, Server } from 'http';
 import * as socketIo from 'socket.io';
+import { ServerClient } from "./serverClient";
 import {TransportProtocol} from './Transport';
 
 class App {
@@ -37,7 +38,22 @@ class App {
 
             socket.on('incomingMessage', (tp: TransportProtocol) => {
 
-                this.io.emit('incomingMessage_rec', tp);
+                if (tp.sentBy == ServerClient.CLIENT) {
+                    if (tp.errorFlag) {
+                        
+                    } else if (tp.lostFlag) {
+                        
+                    }
+
+                    const newTp: TransportProtocol = tp;
+                    newTp.message = "Tp: " +  tp.id + " was sucessfully received";
+                    newTp.sentBy = ServerClient.SERVER;
+                    
+                    this.io.emit('receivedMessage_rec', newTp);
+                    return
+                }
+                
+                return
             });
 
 
