@@ -1,4 +1,4 @@
 export enum ServerClient {
-        CLIENT,
-        SERVER
+        CLIENT="client",
+        SERVER="server"
 }

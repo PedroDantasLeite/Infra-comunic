@@ -40,7 +40,6 @@ class App {
         this.io.on('connection', (socket: any) => {
 
             console.log('a user connected');
-            console.log(socket)
 
             socket.on('incomingMessage', (tp: TransportProtocol) => {
 
@@ -54,8 +53,8 @@ class App {
                     const newTp: TransportProtocol = tp;
                     newTp.message = "Tp: " +  tp.id + " was sucessfully received";
                     newTp.sentBy = ServerClient.SERVER;
-                    
-                    this.io.emit('receivedMessage_rec', newTp);
+                    console.log(newTp);
+                    this.io.emit('receivedMessage', newTp);
                     return
                 }
                 
