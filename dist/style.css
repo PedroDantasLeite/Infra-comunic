@@ -7,27 +7,32 @@ body {
     color: #FFF;
   }
   .message {
-    font-size: 24px;
+    font-size: 50px;
     width: 90%;
   }
   textarea {
-    height: 300px;
-    padding: 10px;
-    width: 97.5%;
+    height: 950px;
+    padding: 5px;
+    width: 40%;
+    height: 890px;
   }
   .send {
-    padding: 15px;
+    padding: 25px;
   }
   .top {
     display: flex;
-    justify-content: center;
     background-color: #CCC;
     border-radius: 5px;
     border: #000 2px solid;
+    position: absolute;
+    width: 1750px;
+    height: 900px;
+    padding: 45px;
   }
   .mpanel {
-    width: 50%;
+    width: 60%;
+    
   }
   .send {
-    width: 90%;
+    width: 91%;
   }
