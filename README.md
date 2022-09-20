@@ -19,26 +19,34 @@
 
 ## Como clonar o repositório:
 ```bash
-$ git clone ""
-$ 
+$ git clone "https://github.com/PedroDantasLeite/Infra-comunic.git"
 ```
 ## Como rodar o programa:
+*Lembre de baixar todas as dependências citadas mais abaixo antes de rodar, se não vai resultar em erro.*
 ```bash
-$ x
-$ 
+$ cd Infra-comunic
+$ yarn run compile
+$ yarn run start
 ```
 
 ## Como utilizar o programa:
-> Título
-- A
+> Insira algum texto na mensagem
+- X
+> Marque alguma das flags
+- X
 
 ## Como testar o programa:
-##### Fr:
-> Título
+##### Error 1:
+> Tempo 
 
 ## Dependências do trabalho:
-*Para saber mais, clique abaixo*
-##### Frontend:
+##### Utilizado:
 - A
-##### Backend:
-- A
+##### Comandos:
+*Lembre de estar dentro do diretório.*
+```bash
+$ yarn install
+$ npm i -g nodemon
+$ npm i -g tsc
+$ npm i -g yarn
+```
