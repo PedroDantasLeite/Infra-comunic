@@ -11,7 +11,6 @@
 - [Como clonar o repositório](#como-clonar-o-repositório)
 - [Como rodar o programa](#como-rodar-o-programa)
 - [Como utilizar o programa](#como-utilizar-o-programa)
-- [Como testar o programa](#como-testar-o-programa)
 - [Dependências do trabalho](#dependências-do-trabalho)
 
 ## Sobre o trabalho:
@@ -30,16 +29,13 @@ $ npm run start
 ```
 
 ## Como utilizar o programa:
+##### Para ...:
 - X
 - X
-
-## Como testar o programa:
-##### Error 1:
-> Tempo 
 
 ## Dependências do trabalho:
 ##### Utilizado:
-- TypeScript; Node.js; Socket.io; Nodemon;
+> TypeScript; Node.js; Socket.io; Nodemon;
 ##### Comandos:
 *Lembre de estar dentro do diretório.*
 ```bash
