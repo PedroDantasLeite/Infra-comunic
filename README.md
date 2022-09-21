@@ -25,8 +25,8 @@ $ git clone "https://github.com/PedroDantasLeite/Infra-comunic.git"
 *Lembre de baixar todas as dependências citadas mais abaixo antes de rodar, se não, vai resultar em erro.*
 ```bash
 $ cd Infra-comunic
-$ yarn run compile
-$ yarn run start
+$ npm run compile
+$ npm run start
 ```
 
 ## Como utilizar o programa:
@@ -39,12 +39,11 @@ $ yarn run start
 
 ## Dependências do trabalho:
 ##### Utilizado:
-- A
+- TypeScript; Node.js; Socket.io; Nodemon;
 ##### Comandos:
 *Lembre de estar dentro do diretório.*
 ```bash
-$ yarn install
+$ npm install
 $ npm i -g nodemon
 $ npm i -g tsc
-$ npm i -g yarn
 ```
