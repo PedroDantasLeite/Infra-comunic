@@ -52,7 +52,9 @@ function sendRequest(data) {
     
     setTimeout(() => {
         if(!responsesRequests.includes(protocol.id)) {
-            addLogMessage(`The protocol ${protocol.id} had lost!`);
+            addLogMessage(`The protocol ${protocol.id} had lost! Resending package`);
+            protocol.lostFlag = false;
+            socket.emit('incomingMessage', protocol);
         }
     }, TIMEOUT * 1000);
 }

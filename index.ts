@@ -52,7 +52,7 @@ class App {
                         return;
                     }
                     const newTp: TransportProtocol = tp;
-                    newTp.message = "Transport: " +  tp.id + " was sucessfully received";
+                    newTp.message = "Transport: " +  tp.id + " was sucessfully received (" + tp.message + ")";
                     newTp.sentBy = ServerClient.SERVER;
                     console.log("Received package", tp.id)
                     this.io.emit('receivedMessage', newTp);
@@ -63,7 +63,7 @@ class App {
 
             socket.on('partialMessage', (tp: TransportProtocol) => {
                 const newTp: TransportProtocol = tp;
-                newTp.message = "Transport: " +  tp.id + " and package: " + tp.subId + " was sucessfully received";
+                newTp.message = "Transport: " +  tp.id + " and package: " + tp.subId + " was sucessfully received (" + tp.message + ")";
                 newTp.sentBy = ServerClient.SERVER;
                 this.io.emit('partialReceived', newTp);
             });
