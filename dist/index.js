@@ -24,12 +24,12 @@ class App {
         });
     }
     sockets() {
-        this.server = http_1.createServer(this.app);
+        this.server = (0, http_1.createServer)(this.app);
         this.io = socketIo(this.server);
     }
     listen() {
         this.io.on('connection', (socket) => {
-            console.log('a user connected');
+            console.log('User connected');
             socket.on('incomingMessage', (tp) => {
                 if (tp.sentBy == serverClient_1.ServerClient.CLIENT) {
                     if (tp.errorFlag) {
@@ -40,15 +40,22 @@ class App {
                         return;
                     }
                     const newTp = tp;
-                    newTp.message = "Tp: " + tp.id + " was sucessfully received";
+                    newTp.message = "Transport: " + tp.id + " was sucessfully received";
                     newTp.sentBy = serverClient_1.ServerClient.SERVER;
+                    console.log("Received package", tp.id);
                     this.io.emit('receivedMessage', newTp);
                     return;
                 }
                 return;
             });
+            socket.on('partialMessage', (tp) => {
+                const newTp = tp;
+                newTp.message = "Transport: " + tp.id + " and package: " + tp.subId + " was sucessfully received";
+                newTp.sentBy = serverClient_1.ServerClient.SERVER;
+                this.io.emit('partialReceived', newTp);
+            });
             socket.on('disconnect', () => {
-                console.log('user disconnected');
+                console.log('User disconnected');
             });
         });
     }

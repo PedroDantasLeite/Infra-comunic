@@ -1,24 +1,41 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>HTML</title>
-    <link rel="stylesheet" href="css">
-    <body>
-      <div class="top">
-        <div class="mpanel">
-          <input type="text" id="message" class="message" placeholder="Mensagem"></input><br></br>
-          <input type="checkbox" id="error">Error</input><br></br>
-          <input type="checkbox" id="lost">Failure</input><br></br>
-          <button onclick="sendFromCode()" id="send" class="send">Send</button>  
-        </div>
-        <textarea id="console"></textarea>
-      </div>
-      <script src="/socket.io/socket.io.js"></script>
-      <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
-      <script src="js"></script>
 
-    </body>
-  </head>
+<head>
+  <title>HTML</title>
+  <link rel="stylesheet" href="css">
+
+<body>
+  <div class="top">
+    <div class="mpanel">
+      <input type="text" id="message" class="message" placeholder="Mensagem"></input><br></br>
+      <div class="inputs">
+        <div class="col1">
+          <input type="radio" name="option" id="error">Error</input><br></br>
+          <input type="radio" name="option" id="lost">Lost</input><br></br>
+        </div>
+        <div class="col2">
+          <input type="radio" name="option" id="partil">Partial send</input><br></br>
+          <input type="radio" name="option" id="another">Duplicate</input><br></br>
+        </div>
+      </div>
+      <button onclick="sendFromCode()" id="send" class="send color-success">Send</button>
+      <button onclick="clearConsole()" class="mt-2 color-danger">Clear console</button>
+    </div>
+    <textarea id="console" disabled></textarea>
+  </div>
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
+  <script src="js"></script>
+  <script>
+    function clearConsole() {
+      document.getElementById('console').innerHTML = "";
+    }
+  </script>
+
+</body>
+</head>
+
 </html>
 
 <!-- file:///home/felipe/school/incomu/Infra-comunic/front/sample.html -->

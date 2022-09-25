@@ -14,7 +14,7 @@ body {
     height: 950px;
     padding: 5px;
     width: 40%;
-    height: 890px;
+    height: 400px;
   }
   .send {
     padding: 25px;
@@ -35,4 +35,25 @@ body {
   }
   .send {
     width: 91%;
+  }
+  .inputs {
+    width: 90%;
+    display: flex;
+    justify-content: space-between;
+  }
+  .color-danger {
+    background-color: #d9534f;
+    color: white;
+    border: none;
+    padding: 20px;
+    cursor: pointer;
+  }
+  .color-success {
+    background-color: #5cb85c;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+  .mt-2 {
+    margin-top: 10px;
   }

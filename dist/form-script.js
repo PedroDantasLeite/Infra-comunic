@@ -1,4 +1,4 @@
-var id = 0;
+var id = 1;
 const TIMEOUT = 5;
 const socket = io();
 const emmitedRequests = [];
@@ -26,14 +26,30 @@ function getData() {
     message = document.getElementById('message').value;
     error = document.getElementById('error').checked;
     lost = document.getElementById('lost').checked;
-    return {message, errorFlag: error, lostFlag: lost};
+    partial = document.getElementById('partil').checked;
+    return {message, errorFlag: error, lostFlag: lost, partial: partial};
+}
+function sendPartial(data) {
+    const splited = data.message.split(" ");
+    const protocol = createProtocol(data);
+    protocol.mutiplePackages = true;
+    protocol.numberOfPackages = splited.length;
+    for(let i = 1; i <= protocol.numberOfPackages; i++) {
+        protocol.subId = i;
+        protocol.message = splited[i - 1];
+        socket.emit('partialMessage', protocol);
+    }
 }
 function sendRequest(data) {
+    if(data.partial) { 
+        sendPartial(data);
+        return;
+    };
     const protocol = createProtocol(data)
     emmitedRequests.push(protocol.id);
 
     if(!data.lostFlag) socket.emit('incomingMessage', protocol);
-
+    
     setTimeout(() => {
         if(!responsesRequests.includes(protocol.id)) {
             addLogMessage(`The protocol ${protocol.id} had lost!`);
@@ -46,6 +62,9 @@ socket.on('receivedMessage', (protocol) => {
 });
 socket.on('errorMessage', (protocol) => {
     responsesRequests.push(protocol.id);
+    addLogMessage(protocol.message);
+});
+socket.on('partialReceived', (protocol) => {
     addLogMessage(protocol.message);
 });
 
