@@ -68,7 +68,6 @@ class App {
                     }else {
                         this.receivedProtocols.push(tp);
                     }
-                    console.log(tp.realId);
                     newTp.sentBy = ServerClient.SERVER;
                     console.log("Received package", tp.realId)
                     this.io.emit('receivedMessage', newTp);
