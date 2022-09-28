@@ -9,6 +9,7 @@ class App {
     public server: Server;
     private io: SocketIO.Server;
     public PORT: number = 8100;
+    private receivedProtocols: TransportProtocol[] = [];
 
     constructor() {
         this.routes();
@@ -35,6 +36,11 @@ class App {
         this.io = socketIo(this.server);
     }
 
+    private hadReceivedProtocol(id: number, subId: number): boolean {
+        const find = this.receivedProtocols.find((protocol) => protocol.id == id && protocol.subId == subId)
+        if(find) return true;
+        return false;
+    }
     private listen(): void {
 
         this.io.on('connection', (socket: any) => {
@@ -46,26 +52,28 @@ class App {
                 if (tp.sentBy == ServerClient.CLIENT) {
                     if (tp.errorFlag) {
                         const newErrorTp: TransportProtocol = tp;
-                        newErrorTp.message = "Error Message"
+                        newErrorTp.message = "Error Message in message " + tp.id + " package " + tp.subId;
                         newErrorTp.sentBy = ServerClient.SERVER;
                         this.io.emit('errorMessage', newErrorTp)
                         return;
                     }
                     const newTp: TransportProtocol = tp;
-                    newTp.message = "Transport: " +  tp.id + " was sucessfully received (" + tp.message + ")";
+                    if(tp.mutiplePackages) {
+                        newTp.message = "Message: " +  tp.id + " and package: " + tp.subId + " was sucessfully received (" + tp.message + ")";
+                    }else {
+                        newTp.message = "Message: " +  tp.id + " was sucessfully received (" + tp.message + ")";
+                    }
+                    if(this.hadReceivedProtocol(tp.id, tp.subId)) {
+                        newTp.message = "Message " + tp.id + " and package: " + tp.subId + " was duplicated!";
+                    }else {
+                        this.receivedProtocols.push(tp);
+                    }
                     newTp.sentBy = ServerClient.SERVER;
                     console.log("Received package", tp.id)
                     this.io.emit('receivedMessage', newTp);
                     return;
                 } 
                 return;
-            });
-
-            socket.on('partialMessage', (tp: TransportProtocol) => {
-                const newTp: TransportProtocol = tp;
-                newTp.message = "Transport: " +  tp.id + " and package: " + tp.subId + " was sucessfully received (" + tp.message + ")";
-                newTp.sentBy = ServerClient.SERVER;
-                this.io.emit('partialReceived', newTp);
             });
 
             socket.on('disconnect', () => {

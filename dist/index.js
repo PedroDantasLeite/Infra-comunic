@@ -7,6 +7,7 @@ const serverClient_1 = require("./serverClient");
 class App {
     constructor() {
         this.PORT = 8100;
+        this.receivedProtocols = [];
         this.routes();
         this.sockets();
         this.listen();
@@ -24,8 +25,14 @@ class App {
         });
     }
     sockets() {
-        this.server = (0, http_1.createServer)(this.app);
+        this.server = http_1.createServer(this.app);
         this.io = socketIo(this.server);
+    }
+    hadReceivedProtocol(id, subId) {
+        const find = this.receivedProtocols.find((protocol) => protocol.id == id && protocol.subId == subId);
+        if (find)
+            return true;
+        return false;
     }
     listen() {
         this.io.on('connection', (socket) => {
@@ -34,25 +41,30 @@ class App {
                 if (tp.sentBy == serverClient_1.ServerClient.CLIENT) {
                     if (tp.errorFlag) {
                         const newErrorTp = tp;
-                        newErrorTp.message = "Error Message";
+                        newErrorTp.message = "Error Message in message " + tp.id + " package " + tp.subId;
                         newErrorTp.sentBy = serverClient_1.ServerClient.SERVER;
                         this.io.emit('errorMessage', newErrorTp);
                         return;
                     }
                     const newTp = tp;
-                    newTp.message = "Transport: " + tp.id + " was sucessfully received (" + tp.message + ")";
+                    if (tp.mutiplePackages) {
+                        newTp.message = "Message: " + tp.id + " and package: " + tp.subId + " was sucessfully received (" + tp.message + ")";
+                    }
+                    else {
+                        newTp.message = "Message: " + tp.id + " was sucessfully received (" + tp.message + ")";
+                    }
+                    if (this.hadReceivedProtocol(tp.id, tp.subId)) {
+                        newTp.message = "Message " + tp.id + " and package: " + tp.subId + " was duplicated!";
+                    }
+                    else {
+                        this.receivedProtocols.push(tp);
+                    }
                     newTp.sentBy = serverClient_1.ServerClient.SERVER;
                     console.log("Received package", tp.id);
                     this.io.emit('receivedMessage', newTp);
                     return;
                 }
                 return;
-            });
-            socket.on('partialMessage', (tp) => {
-                const newTp = tp;
-                newTp.message = "Transport: " + tp.id + " and package: " + tp.subId + " was sucessfully received (" + tp.message + ")";
-                newTp.sentBy = serverClient_1.ServerClient.SERVER;
-                this.io.emit('partialReceived', newTp);
             });
             socket.on('disconnect', () => {
                 console.log('User disconnected');

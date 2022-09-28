@@ -6,6 +6,11 @@ const responsesRequests = [];
 function addLogMessage(message) {
     document.getElementById('console').innerHTML += message + "\n";
 }
+function hadReceivedProtocol(messageId, subId) {
+    const find = responsesRequests.find((protocol) => protocol.id == messageId && protocol.subId == subId)
+    if(find) return true;
+    return false;
+}
 function createProtocol(data) {
     const protocol = {
         id,
@@ -13,7 +18,8 @@ function createProtocol(data) {
         message: data.message,
         errorFlag: data.errorFlag,
         lostFlag: data.lostFlag,
-        sentBy: "client"
+        sentBy: "client",
+        subId: 0
     }
     id++;
     return protocol;
@@ -23,22 +29,49 @@ function sendFromCode() {
     sendRequest(data);
 }
 function getData() {
-    message = document.getElementById('message').value;
-    error = document.getElementById('error').checked;
-    lost = document.getElementById('lost').checked;
-    partial = document.getElementById('partil').checked;
-    return {message, errorFlag: error, lostFlag: lost, partial: partial};
+   let message = document.getElementById('message').value;
+   let error = document.getElementById('error').checked;
+   let lost = document.getElementById('lost').checked;
+   let partial = document.getElementById('partil').checked;
+   let duplicate = document.getElementById('duplicated').checked;
+    return {message, errorFlag: error, lostFlag: lost, partial: partial, duplicate: duplicate};
 }
 function sendPartial(data) {
+    const subProtocols = [];
     const splited = data.message.split(" ");
     const protocol = createProtocol(data);
     protocol.mutiplePackages = true;
     protocol.numberOfPackages = splited.length;
+
     for(let i = 1; i <= protocol.numberOfPackages; i++) {
+        protocol.lostFlag = false;
+        protocol.errorFlag = false;
+        const fullMessage = splited[i - 1].split("-");
+        const message = fullMessage[0]
+        if(fullMessage.length > 1) {
+            if(fullMessage[1] == 'l') protocol.lostFlag = true;
+            if(fullMessage[1] == 'e') protocol.errorFlag = true;
+        }
         protocol.subId = i;
-        protocol.message = splited[i - 1];
-        socket.emit('partialMessage', protocol);
+        protocol.message = message;
+        if(!protocol.lostFlag) socket.emit('incomingMessage', protocol);
+        subProtocols.push(protocol);
     }
+    setTimeout(() => {
+        for(let i = 1; i <= protocol.numberOfPackages; i++) {
+            if(!hadReceivedProtocol(protocol.id, i)) {
+                protocol.lostFlag = false;
+                protocol.errorFlag = false;
+                const fullMessage = splited[i - 1].split("-");
+                const message = fullMessage[0]
+                protocol.subId = i;
+                protocol.message = message;
+                addLogMessage(`The message ${protocol.id} package ${i} had lost! Resending package`);
+                socket.emit('incomingMessage', protocol);
+            }
+        }
+
+    }, TIMEOUT * 1000);
 }
 function sendRequest(data) {
     if(data.partial) { 
@@ -49,21 +82,23 @@ function sendRequest(data) {
     emmitedRequests.push(protocol.id);
 
     if(!data.lostFlag) socket.emit('incomingMessage', protocol);
+
+    if(data.duplicate) socket.emit('incomingMessage', protocol);
     
     setTimeout(() => {
-        if(!responsesRequests.includes(protocol.id)) {
-            addLogMessage(`The protocol ${protocol.id} had lost! Resending package`);
+        if(!hadReceivedProtocol(protocol.id, protocol.subId)) {
+            addLogMessage(`The message ${protocol.id} had lost! Resending package`);
             protocol.lostFlag = false;
             socket.emit('incomingMessage', protocol);
         }
     }, TIMEOUT * 1000);
 }
 socket.on('receivedMessage', (protocol) => {
-    responsesRequests.push(protocol.id);
+    responsesRequests.push({id: protocol.id, subId: protocol.subId});
     addLogMessage(protocol.message);
 });
 socket.on('errorMessage', (protocol) => {
-    responsesRequests.push(protocol.id);
+    responsesRequests.push({id: protocol.id, subId: protocol.subId});
     addLogMessage(protocol.message);
 });
 socket.on('partialReceived', (protocol) => {
