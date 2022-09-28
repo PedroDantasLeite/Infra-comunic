@@ -3,7 +3,10 @@
 
 <head>
   <title>HTML</title>
-  <link rel="stylesheet" href="css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./style.css">
 
 <body>
   <div class="top">
@@ -11,16 +14,17 @@
       <input type="text" id="message" class="message" placeholder="Mensagem"></input><br></br>
       <div class="inputs">
         <div class="col1">
-          <input type="radio" name="option" id="error">Error</input><br></br>
-          <input type="radio" name="option" id="lost">Lost</input><br></br>
-        </div>
-        <div class="col2">
-          <input type="radio" name="option" id="partil">Partial send</input><br></br>
-          <input type="radio" name="option" id="duplicated">Duplicate</input><br></br>
+          <input type="radio" name="option" id="error"><span class="larger">Error</span></input><br></br>
+          <input type="radio" name="option" id="lost"><span class="larger">Lost</span></input><br></br>
+          <input type="radio" name="option" id="partil"><span class="larger">Partial Send</span></input><br></br>
+          <input type="radio" name="option" id="duplicated"><span class="larger">Duplicate</span></input><br></br>
         </div>
       </div>
-      <button onclick="sendFromCode()" id="send" class="send color-success">Send</button>
-      <button onclick="clearConsole()" class="mt-2 color-danger">Clear console</button>
+      <div class="just-center">
+        <button onclick="sendFromCode()" id="send" class="color-success">Send</button>
+        <button onclick="clearConsole()" class="color-danger">Clear console</button>
+      </div><br>
+      <span id="information"></span>
     </div>
     <textarea id="console" disabled></textarea>
   </div>
@@ -28,14 +32,30 @@
   <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
   <script src="js"></script>
   <script>
+    const check = document.getElementById('partil')
+    const checkb = document.getElementById('error')
+    const checkc = document.getElementById('lost')
+    const checkd = document.getElementById('duplicated')
+
     function clearConsole() {
       document.getElementById('console').innerHTML = "";
     }
+
+    check.addEventListener('change', function() {
+      document.getElementById('information').textContent = "You can use multiple packages by separating them with a space. For example: 'pac1 pac2 pac3'."
+    })
+    checkb.addEventListener('change', function() {
+      document.getElementById('information').textContent = ""
+    })
+    checkc.addEventListener('change', function() {
+      document.getElementById('information').textContent = ""
+    })
+    checkd.addEventListener('change', function() {
+      document.getElementById('information').textContent = ""
+    })
   </script>
 
 </body>
 </head>
 
 </html>
-
-<!-- file:///home/felipe/school/incomu/Infra-comunic/front/sample.html -->

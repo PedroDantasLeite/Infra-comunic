@@ -1,59 +1,80 @@
 body {
-    background-color: #AAA;
-    font-family: 'Arial', sans-serif;
-    padding: 25px;
-  }
-  p,h1 {
-    color: #FFF;
-  }
-  .message {
-    font-size: 50px;
-    width: 90%;
-  }
-  textarea {
-    height: 950px;
-    padding: 5px;
-    width: 40%;
-    height: 400px;
-  }
-  .send {
-    padding: 25px;
-  }
-  .top {
-    display: flex;
-    background-color: #CCC;
-    border-radius: 5px;
-    border: #000 2px solid;
-    position: absolute;
-    width: 1750px;
-    height: 900px;
-    padding: 45px;
-  }
-  .mpanel {
-    width: 60%;
-    
-  }
-  .send {
-    width: 91%;
-  }
-  .inputs {
-    width: 90%;
-    display: flex;
-    justify-content: space-between;
-  }
-  .color-danger {
-    background-color: #d9534f;
-    color: white;
-    border: none;
-    padding: 20px;
-    cursor: pointer;
-  }
-  .color-success {
-    background-color: #5cb85c;
-    color: white;
-    border: none;
-    cursor: pointer;
-  }
-  .mt-2 {
-    margin-top: 10px;
-  }
+  background-color: #AAA;
+  font-family: 'Roboto', 'Arial', sans-serif;
+  padding: 25px;
+  font-size: 24px;
+}
+p,h1 {
+  color: #FFF;
+}
+.message {
+  font-size: 32px;
+  width: 95%;
+  border: none;
+  border-radius: 10px;
+  font-family: 'Roboto', 'Arial', sans-serif;
+}
+textarea {
+  height: 75%;
+  padding: 5px;
+  width: 40%;
+  font-size: 18px;
+}
+textarea:disabled {
+  background-color: #FFF;
+}
+.larger {
+  font-size: 24px;
+  display: inline;
+}
+.send {
+  padding: 25px;
+}
+.top {
+  display: flex;
+  background-color: #CCC;
+  border-radius: 5px;
+  border: #000 2px solid;
+  position: absolute;
+  padding: 25px;
+  width: 90%;
+  height: 80%;
+}
+.mpanel {
+  width: 60%;  
+}
+.inputs {
+  width: 90%;
+  display: flex;
+  justify-content: space-between;
+}
+.color-danger {
+  background-color: #d9534f;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  padding: 20px;
+  cursor: pointer;
+  width: 35%;
+  font-size: 24px;
+  margin-left: 20px;
+  font-family: 'Roboto', 'Arial', sans-serif;
+}
+.color-success {
+  background-color: #5cb85c;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  width: 65%;
+  font-size: 24px;
+  font-family: 'Roboto', 'Arial', sans-serif;
+}
+.mt-2 {
+  margin-top: 10px;
+}
+.just-center {
+  justify-content: center;
+  display: flex;
+  margin-right: 50px;
+}
