@@ -29,9 +29,31 @@ $ npm run start
 ```
 
 ## Como utilizar o programa:
-##### Para ...:
-- X
-- X
+##### Para mandar uma mensagem normal, sem nenhuma flag ativada:
+- *A mensagem inteira é mandada em um único pacote, mesmo se ela estiver divida em substring.*
+- Essa mensagem é recebida com sucesso.
+##### Para mandar uma mensagem com erro, é necessário a flag chamda "Error" esteja ativada:
+- *A mensagem inteira é mandada em um único pacote, mesmo se ela estiver divida em substring.*
+- Essa mensagem tem erro.
+##### Para mandar uma mensagem com perda, é necessário a flag chamda "Lost" esteja ativada:
+- *A mensagem inteira é mandada em um único pacote, mesmo se ela estiver divida em substring.*
+- Essa mensagem não foi recebedida, pois não chegou ao prazo estipulado pelo servidor. Então o servidor reenvia esse pacote.
+##### Para mandar uma mensagem com diferentes pacotes, é necessário a flag chamda "Partial send" esteja ativada:
+- *A mensagem inteira é mandada em vários pacotes, a quantidade de pacote depende da quantidade de substring.*
+- Essa mensagem é recebida com sucesso para cada pacote apresentado.
+##### Para mandar uma mensagem com erro em diferentes pacotes, é necessário a flag chamda "Partial send" esteja ativada e colocar no final da substring (pacote) escolhida(o) "-e":
+- *A mensagem inteira é mandada em vários pacotes, a quantidade de pacote depende da quantidade de substring.*
+- Essa mensagem é recebida com sucesso para cada pacote apresentado, menos para a substring escolhida, esse terá a mensagem com erro.
+- *Caso também queira que tenha perda em um pacote específico, realizar o próximo passo.*
+##### Para mandar uma mensagem com perda em diferentes pacotes, é necessário a flag chamda "Partial send" esteja ativada e colocar no final da substring (pacote) escolhida(o) "-l":
+- *A mensagem inteira é mandada em vários pacotes, a quantidade de pacote depende da quantidade de substring.*
+- Essa mensagem é recebida com sucesso para cada pacote apresentado, menos para a substring escolhida, esse terá a mensagem não recebedida, pois não chegou ao prazo estipulado pelo servidor. Então o servidor reenvia esse pacote.
+- *Caso também queira que tenha erro em um pacote específico, realizar o passo anterior.*
+##### Para mandar uma mensagem duplicada, é necessário a flag chamda "Duplicated" esteja ativada:
+- *A mensagem inteira é mandada em um único pacote, mesmo se ela estiver divida em substring.*
+- Essa mensagem é recebida com sucesso e reenviado novamente dizendo que o pacote foi duplicado.
+
+> Obs: Para cada mensagem, uma nova requisição é realizada.
 
 ## Dependências do trabalho:
 ##### Utilizado:
