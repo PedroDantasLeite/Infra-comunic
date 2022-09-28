@@ -36,8 +36,8 @@ class App {
         this.io = socketIo(this.server);
     }
 
-    private hadReceivedProtocol(id: number, subId: number): boolean {
-        const find = this.receivedProtocols.find((protocol) => protocol.id == id && protocol.subId == subId)
+    private hadReceivedProtocol(id: number): boolean {
+        const find = this.receivedProtocols.find((protocol) => protocol.realId == id)
         if(find) return true;
         return false;
     }
@@ -63,13 +63,14 @@ class App {
                     }else {
                         newTp.message = "Message: " +  tp.id + " was sucessfully received (" + tp.message + ")";
                     }
-                    if(this.hadReceivedProtocol(tp.id, tp.subId)) {
+                    if(this.hadReceivedProtocol(tp.realId)) {
                         newTp.message = "Message " + tp.id + " and package: " + tp.subId + " was duplicated!";
                     }else {
                         this.receivedProtocols.push(tp);
                     }
+                    console.log(tp.realId);
                     newTp.sentBy = ServerClient.SERVER;
-                    console.log("Received package", tp.id)
+                    console.log("Received package", tp.realId)
                     this.io.emit('receivedMessage', newTp);
                     return;
                 } 

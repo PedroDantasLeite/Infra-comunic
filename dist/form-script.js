@@ -19,7 +19,8 @@ function createProtocol(data) {
         errorFlag: data.errorFlag,
         lostFlag: data.lostFlag,
         sentBy: "client",
-        subId: 0
+        subId: 0,
+        realId: new Date().getTime()
     }
     id++;
     return protocol;
@@ -54,6 +55,7 @@ function sendPartial(data) {
         }
         protocol.subId = i;
         protocol.message = message;
+        protocol.realId = new Date().getTime();
         if(!protocol.lostFlag) socket.emit('incomingMessage', protocol);
         subProtocols.push(protocol);
     }

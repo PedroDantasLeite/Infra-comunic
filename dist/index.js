@@ -25,11 +25,11 @@ class App {
         });
     }
     sockets() {
-        this.server = http_1.createServer(this.app);
+        this.server = (0, http_1.createServer)(this.app);
         this.io = socketIo(this.server);
     }
-    hadReceivedProtocol(id, subId) {
-        const find = this.receivedProtocols.find((protocol) => protocol.id == id && protocol.subId == subId);
+    hadReceivedProtocol(id) {
+        const find = this.receivedProtocols.find((protocol) => protocol.realId == id);
         if (find)
             return true;
         return false;
@@ -53,14 +53,15 @@ class App {
                     else {
                         newTp.message = "Message: " + tp.id + " was sucessfully received (" + tp.message + ")";
                     }
-                    if (this.hadReceivedProtocol(tp.id, tp.subId)) {
+                    if (this.hadReceivedProtocol(tp.realId)) {
                         newTp.message = "Message " + tp.id + " and package: " + tp.subId + " was duplicated!";
                     }
                     else {
                         this.receivedProtocols.push(tp);
                     }
+                    console.log(tp.realId);
                     newTp.sentBy = serverClient_1.ServerClient.SERVER;
-                    console.log("Received package", tp.id);
+                    console.log("Received package", tp.realId);
                     this.io.emit('receivedMessage', newTp);
                     return;
                 }

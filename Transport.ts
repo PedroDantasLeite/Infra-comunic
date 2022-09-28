@@ -2,6 +2,7 @@ import { ServerClient } from './serverClient';
 export class TransportProtocol {
 
         public id:number;
+        public realId: number;
         public subId: number;
         public message:String;
         public errorFlag:boolean;
