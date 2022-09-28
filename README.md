@@ -53,8 +53,6 @@ $ npm run start
 - *A mensagem inteira é mandada em um único pacote, mesmo se ela estiver divida em substring.*
 - Essa mensagem é recebida com sucesso e reenviado novamente dizendo que o pacote foi duplicado.
 
-> Obs: Para cada mensagem, uma nova requisição é realizada.
-
 ## Dependências do trabalho:
 ##### Utilizado:
 > TypeScript; Node.js; Socket.io; Nodemon;
