@@ -102,15 +102,15 @@ $ npm run start
 ##### For a message with different packages, the flag called "Partial send" is required for an activated message:
 - *The entire message is sent in several packets, the amount of packet depends on the amount of substring.*
 - This message received is successful for each package presented
-##### To send a message with error in different, it is necessary a flag called "Partial send" activated and put at the end of the substring (package) chosen (the) "-e":
+##### To send a message with error in different, it is necessary a flag called "Partial send" activated and put at the end of the substring (package) chosen the "-e":
 - *The entire message is sent in several packets, the amount of packet depends on the amount of substring.*
 - This received message is received successfully for each packet minus the chosen substring, this one will have the error message.
 - *If you also want to have a specific package, perform the next step.*
 ##### To send a lossy message in different, it is necessary to have a flag called "Partial send" activated and put "-l" at the end of the substring (package) chosen:
 - *The entire message is sent in several packets, the amount of packet depends on the amount of substring.*
-- This received message is successfully received for each chosen packet, this one has the message not received, because it did not reach the stipulated by the server. Then the server resends that packet.
+- This received message is successfully received for each chosen packet, this one has the message not received, because it didn't reach the stipulated by the server. Then the server resends that packet.
 - *If you also want an error in a specific package, perform the previous step.*
-##### To send a duplicate message, the flag called" must be activated:
+##### To send a duplicate message, the flag called "Duplicate" must be activated:
 - *The entire message is sent in a single packet, even if it is split into a substring.*
 - This message is successfully received again and resends saying that the packet has been duplicated.
 
