@@ -33,24 +33,24 @@ $ npm run start
 ##### Para mandar uma mensagem normal, sem nenhuma flag ativada:
 - *A mensagem inteira é mandada em um único pacote, mesmo se ela estiver divida em substring.*
 - Essa mensagem é recebida com sucesso.
-##### Para mandar uma mensagem com erro, é necessário a flag chamda "Error" esteja ativada:
+##### Para mandar uma mensagem com erro, é necessário a flag chamada "Error" esteja ativada:
 - *A mensagem inteira é mandada em um único pacote, mesmo se ela estiver divida em substring.*
 - Essa mensagem tem erro.
-##### Para mandar uma mensagem com perda, é necessário a flag chamda "Lost" esteja ativada:
+##### Para mandar uma mensagem com perda, é necessário a flag chamada "Lost" esteja ativada:
 - *A mensagem inteira é mandada em um único pacote, mesmo se ela estiver divida em substring.*
 - Essa mensagem não foi recebedida, pois não chegou ao prazo estipulado pelo servidor. Então o servidor reenvia esse pacote.
-##### Para mandar uma mensagem com diferentes pacotes, é necessário a flag chamda "Partial send" esteja ativada:
+##### Para mandar uma mensagem com diferentes pacotes, é necessário a flag chamada "Partial send" esteja ativada:
 - *A mensagem inteira é mandada em vários pacotes, a quantidade de pacote depende da quantidade de substring.*
 - Essa mensagem é recebida com sucesso para cada pacote apresentado.
-##### Para mandar uma mensagem com erro em diferentes pacotes, é necessário a flag chamda "Partial send" esteja ativada e colocar no final da substring (pacote) escolhida(o) "-e":
+##### Para mandar uma mensagem com erro em diferentes pacotes, é necessário a flag chamada "Partial send" esteja ativada e colocar no final da substring (pacote) escolhida(o) "-e":
 - *A mensagem inteira é mandada em vários pacotes, a quantidade de pacote depende da quantidade de substring.*
-- Essa mensagem é recebida com sucesso para cada pacote apresentado, menos para a substring escolhida, esse terá a mensagem com erro.
+- Essa mensagem é recebida com sucesso para cada pacote apresentado, menos para a substring escolhida, que terá uma mensagem com erro.
 - *Caso também queira que tenha perda em um pacote específico, realizar o próximo passo.*
-##### Para mandar uma mensagem com perda em diferentes pacotes, é necessário a flag chamda "Partial send" esteja ativada e colocar no final da substring (pacote) escolhida(o) "-l":
+##### Para mandar uma mensagem com perda em diferentes pacotes, é necessário a flag chamada "Partial send" esteja ativada e colocar no final da substring (pacote) escolhida(o) "-l":
 - *A mensagem inteira é mandada em vários pacotes, a quantidade de pacote depende da quantidade de substring.*
-- Essa mensagem é recebida com sucesso para cada pacote apresentado, menos para a substring escolhida, esse terá a mensagem não recebedida, pois não chegou ao prazo estipulado pelo servidor. Então o servidor reenvia esse pacote.
+- Essa mensagem é recebida com sucesso para cada pacote apresentado, menos para a substring escolhida, que terá a mensagem não recebedida, pois não chegou ao prazo estipulado pelo servidor. Então o servidor reenvia esse pacote.
 - *Caso também queira que tenha erro em um pacote específico, realizar o passo anterior.*
-##### Para mandar uma mensagem duplicada, é necessário a flag chamda "Duplicated" esteja ativada:
+##### Para mandar uma mensagem duplicada, é necessário a flag chamada "Duplicated" esteja ativada:
 - *A mensagem inteira é mandada em um único pacote, mesmo se ela estiver divida em substring.*
 - Essa mensagem é recebida com sucesso e reenviado novamente dizendo que o pacote foi duplicado.
 
@@ -90,27 +90,27 @@ $ npm run start
 ```
 
 ## How to use the program:
-##### To send a normal message, with no flag activated:
+##### To send a normal message, it is necessary to have no flag activated:
 - *The entire message is sent in a single packet, even if it is split into a substring.*
 - This message received is successful.
-##### To send a message with an error, it is necessary to have the message called "Error" activated flag:
+##### To send a message with an error, it is necessary to have the flag called "Error" activated:
 - *The entire message is sent in a single packet, even if it is split into a substring.*
 - This message has an error.
-##### To send a message with loss, the message flag "Lost" must be activated:
+##### To send a message with loss, it is necessary to have the flag called "Lost" activated:
 - *The entire message is sent in a single packet, even if it is split into a substring.*
-- This message was not received, as it did not reach the deadline stipulated by the server. Then the server resends that packet.
+- This message was not received, as it didn't reach the deadline stipulated by the server. Then the server resends that packet.
 ##### For a message with different packages, the flag called "Partial send" is required for an activated message:
 - *The entire message is sent in several packets, the amount of packet depends on the amount of substring.*
-- This message received is successful for each package presented
-##### To send a message with error in different, it is necessary a flag called "Partial send" activated and put at the end of the substring (package) chosen the "-e":
+- This message is successfully received for each packet presented.
+##### To send a message with error in different packets, it is necessary to have the flag called "Partial send" activated and put at the end of the substring (package) chosen, the "-e":
 - *The entire message is sent in several packets, the amount of packet depends on the amount of substring.*
-- This received message is received successfully for each packet minus the chosen substring, this one will have the error message.
-- *If you also want to have a specific package, perform the next step.*
-##### To send a lossy message in different, it is necessary to have a flag called "Partial send" activated and put "-l" at the end of the substring (package) chosen:
+- This message is successfully received for each package presented, except for the chosen substring, that it will have an error message
+- *If you also want to have loss in a specific package, perform the next step.*
+##### To send a lossy message in different packets, it is necessary to have a flag called "Partial send" activated and put "-l" at the end of the substring (package) chosen:
 - *The entire message is sent in several packets, the amount of packet depends on the amount of substring.*
-- This received message is successfully received for each chosen packet, this one has the message not received, because it didn't reach the stipulated by the server. Then the server resends that packet.
+- This message is successfully received for each packet presented, except for the chosen substring, which will have the message not received, because it didn't reach the deadline stipulated by the server. Then the server resends that packet.
 - *If you also want an error in a specific package, perform the previous step.*
-##### To send a duplicate message, the flag called "Duplicate" must be activated:
+##### To send a duplicate message, it is necessary to have the flag called "Duplicate" activated:
 - *The entire message is sent in a single packet, even if it is split into a substring.*
 - This message is successfully received again and resends saying that the packet has been duplicated.
 
